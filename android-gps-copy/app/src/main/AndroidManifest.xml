@@ -45,13 +45,11 @@
             android:noHistory="true"
             android:theme="@style/Theme.Transparent" />
 
-        <!--
-            Listens for the system Location/GPS ON-OFF event.
-            android.location.PROVIDERS_CHANGED is EXEMPT from the implicit-broadcast
-            restrictions, so a manifest-declared receiver works even while the app is dormant.
-            The fresh fix is fetched directly inside the receiver via goAsync() -- no
-            foreground service is started from the background (which Android 12+ blocks).
-        -->
+        <!-- Listens for the system Location/GPS ON-OFF event. -->
+        <!-- android.location.PROVIDERS_CHANGED is EXEMPT from the implicit-broadcast -->
+        <!-- restrictions, so a manifest-declared receiver works even while the app is dormant. -->
+        <!-- The fresh fix is fetched directly inside the receiver via goAsync() - no -->
+        <!-- foreground service is started from the background (which Android 12+ blocks). -->
         <receiver
             android:name=".ProvidersChangedReceiver"
             android:exported="true">
