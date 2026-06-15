@@ -7,10 +7,6 @@
     <!-- Needed so a fresh fix can be obtained when the app is triggered in the background -->
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
-    <!-- Foreground service used ONLY for the brief moment we fetch one fresh fix -->
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
-
     <!-- Notification on Android 13+ -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
@@ -53,6 +49,8 @@
             Listens for the system Location/GPS ON-OFF event.
             android.location.PROVIDERS_CHANGED is EXEMPT from the implicit-broadcast
             restrictions, so a manifest-declared receiver works even while the app is dormant.
+            The fresh fix is fetched directly inside the receiver via goAsync() -- no
+            foreground service is started from the background (which Android 12+ blocks).
         -->
         <receiver
             android:name=".ProvidersChangedReceiver"
@@ -66,12 +64,6 @@
         <receiver
             android:name=".ActionReceiver"
             android:exported="false" />
-
-        <!-- Brief foreground service that fetches a single fresh location fix -->
-        <service
-            android:name=".LocationService"
-            android:exported="false"
-            android:foregroundServiceType="location" />
 
     </application>
 </manifest>
