@@ -27,6 +27,10 @@ object Constants {
     /** Debounce: PROVIDERS_CHANGED can fire several times in a burst. */
     const val TRIGGER_DEBOUNCE_MS = 4000L
 
-    /** Give up waiting for a fresh fix after this long. */
-    const val FIX_TIMEOUT_MS = 30_000L
+    /**
+     * How long we wait for a fresh fix before falling back to the last known
+     * location. Kept under the ~10s BroadcastReceiver/goAsync budget so the
+     * receiver never gets killed mid-fetch.
+     */
+    const val FIX_SOFT_TIMEOUT_MS = 7_000L
 }
